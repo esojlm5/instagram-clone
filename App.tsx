@@ -1,39 +1,18 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { useSelector, useDispatch, Provider as StorePovider } from 'react-redux';
+import { Provider as StorePovider } from 'react-redux';
 
-import type { RootState } from './redux/store';
-import { decrement, increment } from './redux/counter/counterSlice'
 import { Header } from './components';
 
 
-import { Props } from "./types/rootTypes";
 import { store } from './redux/store';
 
-import { ReelsScreen, ShopScreen, SearchScreen } from './screens';
+import { ReelsScreen, ShopScreen, SearchScreen, HomeScreen } from './screens';
 import { HomeIcon, ReelsIcon, SearchIcon, ShopIcon } from './icons';
-
-const HomeScreen = ({ navigation }: Props) => {
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
-
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Home Screen</Text>
-      <Button
-        title="Go to Reels"
-        onPress={() => navigation.navigate('Reels')}
-      />
-      <Button title="Increment" onPress={() => dispatch(increment())} />
-      <Text>{count}</Text>
-      <Button title="Decrement" onPress={() => dispatch(decrement())} />
-    </View>
-  );
-}
 
 // const RootStack = createStackNavigator<RootStackParamList>();
 const Tab = createBottomTabNavigator();
@@ -45,16 +24,16 @@ export default function App() {
         <PaperProvider>
           <NavigationContainer>
             <Tab.Navigator
-              initialRouteName="Home"
+              initialRouteName='Home'
               screenOptions={{
                 tabBarStyle: {
-                  paddingTop: 20,
-                  marginBottom: 10
+                  paddingTop: 16,
+                  paddingBottom: 10,
                 }
               }}
             >
               <Tab.Screen
-                name="Home"
+                name='Home'
                 component={HomeScreen}
                 options={{
                   header: () => <Header />,
@@ -62,21 +41,21 @@ export default function App() {
                   tabBarLabel: ''
                 }} />
               <Tab.Screen
-                name="Search"
+                name='Search'
                 component={SearchScreen}
                 options={{
                   tabBarIcon: () => <SearchIcon />,
                   tabBarLabel: ''
                 }} />
               <Tab.Screen
-                name="Reels"
+                name='Reels'
                 component={ReelsScreen}
                 options={{
                   tabBarIcon: () => <ReelsIcon />,
                   tabBarLabel: ''
                 }} />
               <Tab.Screen
-                name="Shop"
+                name='Shop'
                 component={ShopScreen}
                 options={{
                   tabBarIcon: () => <ShopIcon />,
@@ -93,9 +72,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tabContainer: {
     paddingTop: 20
