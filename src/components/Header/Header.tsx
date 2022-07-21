@@ -19,7 +19,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'space-between',
-    overflow: 'hidden'
+    overflow: 'hidden',
+    boxShadow: 'none',
+    elevation: 0
   },
   logo: {
     marginRight: 'auto'

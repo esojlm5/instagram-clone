@@ -1,42 +1,37 @@
 
-import { StyleSheet, SafeAreaView, Button, Text, View, FlatList } from "react-native";
-import { useSelector, useDispatch } from 'react-redux';
+import { StyleSheet, SafeAreaView, View, FlatList, ScrollView } from "react-native";
 import { faker } from '@faker-js/faker';
 
-import { decrement, increment } from '../redux/counter/counterSlice'
 import { Props } from "../types/rootTypes";
-import { ListStories } from '../components'
+import { ListStories, Post } from '../components'
 
-import type { RootState } from '../redux/store';
 
 const HomeScreen = ({ navigation }: Props) => {
-  const count = useSelector((state: RootState) => state.counter.value)
-  const dispatch = useDispatch()
 
   const DATA = [
     {
       id: 'bd7acbea-c1b1-46c2-aed5-3ad53abb28ba',
-      title: 'First Item',
+      title: 'First',
       image: faker.image.avatar()
     },
     {
       id: '3ac68afc-c605-48d3-a4f8-fbd91aa97f63',
-      title: 'Second Item',
+      title: 'Second item',
       image: faker.image.avatar()
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d72',
-      title: 'Third Item',
+      title: 'Third',
       image: faker.image.avatar()
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d42',
-      title: 'Fourth Item',
+      title: 'Fourth',
       image: faker.image.avatar()
     },
     {
       id: '58694a0f-3da1-471f-bd96-145571e29d2323',
-      title: 'Fourth Item',
+      title: 'Fourth',
       image: faker.image.avatar()
     },
     {
@@ -47,33 +42,29 @@ const HomeScreen = ({ navigation }: Props) => {
   ];
 
   return (
-    <View style={{ flex: 1 }}>
+    <ScrollView
+      style={{ flex: 1 }}
+      showsVerticalScrollIndicator={false}
+    >
       <SafeAreaView >
         <FlatList
           showsHorizontalScrollIndicator={false}
           horizontal
           data={DATA}
-          renderItem={({ item }) => <ListStories image={item.image} />}
+          renderItem={({ item }) => <ListStories {...item} />}
           keyExtractor={item => item.id}
         />
       </SafeAreaView>
       <View style={styles.content}>
-        <Text>Home Screen changed</Text>
-        <Button
-          title="Go to Reels"
-          onPress={() => navigation.navigate('Reels')}
-        />
-        <Button title="Increment" onPress={() => dispatch(increment())} />
-        <Text>{count}</Text>
-        <Button title="Decrement" onPress={() => dispatch(decrement())} />
+        <Post />
+        <Post />
       </View>
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   content: {
-    alignItems: 'center',
     marginTop: 20
   }
 })

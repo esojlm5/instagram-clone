@@ -1,6 +1,28 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    // Path alias config
+    "baseUrl": ".",
+    "paths": {
+      // This needs to be mirrored in babel.config.js
+      // Components is a directory with sub directories
+      "@components/*": [
+        "src/components/*"
+      ],
+      "@redux/*": [
+        "src/redux/*"
+      ],
+      "@navigation/*": [
+        "src/navigation/*"
+      ],
+      "@screens/*": [
+        "src/screens/*"
+      ],
+      // We want to expose the exports of the buttons index file
+      "@src": [
+        "src/*"
+      ]
+    }
   }
 }

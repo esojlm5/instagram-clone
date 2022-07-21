@@ -1,14 +1,23 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
+import { useAppDispatch } from '../../hooks/useRedux';
 import { faker } from '@faker-js/faker';
 import { Avatar } from 'react-native-paper';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { userFetch } from '../../redux/loginSlice';
+
 type stories = {
-  image: string
+  image: string,
+  title: string,
 }
 
-const ListStories = ({ image }: stories) => {
+const ListStories = ({ image, title }: stories) => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(userFetch({ email: 'josep@gmail.com', password: '123123' }))
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -25,6 +34,11 @@ const ListStories = ({ image }: stories) => {
           />
         </View>
       </LinearGradient>
+      <Text numberOfLines={1}>{
+        title.length < 10
+          ? `${title}`
+          : `${title.substring(0, 8)}...`
+      }</Text>
     </View>
   )
 }
@@ -32,7 +46,8 @@ const ListStories = ({ image }: stories) => {
 const styles = StyleSheet.create({
   container: {
     marginTop: 20,
-    marginHorizontal: 5
+    marginHorizontal: 5,
+    alignItems: 'center',
   },
   gradient: {
     borderRadius: 50,
@@ -42,6 +57,12 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     backgroundColor: 'white',
     padding: 2,
+  },
+  text: {
+    // whiteSpace: 'nowrap',
+    // overflow: 'hidden',
+    // textOverflow: 'ellipsis',
+    // width: 60
   },
   image: {
     borderRadius: 50,
