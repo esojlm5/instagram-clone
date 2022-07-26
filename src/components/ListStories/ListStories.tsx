@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, Image, View } from 'react-native';
-import { useAppDispatch } from '../../hooks/useRedux';
-import { faker } from '@faker-js/faker';
-import { Avatar } from 'react-native-paper';
+import { useAppDispatch } from '@hooks/useRedux';
 import { LinearGradient } from 'expo-linear-gradient';
 
 import { userFetch } from '../../redux/loginSlice';
@@ -16,7 +14,7 @@ const ListStories = ({ image, title }: stories) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(userFetch({ email: 'josep@gmail.com', password: '123123' }))
+    // dispatch(userFetch({ 'email': 'jose1@gmail.com', 'password': 'jose123' }))
   }, [])
 
   return (

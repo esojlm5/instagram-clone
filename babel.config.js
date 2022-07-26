@@ -30,6 +30,7 @@ module.exports = function (api) {
             // This needs to be mirrored in tsconfig.json
             "@redux": "./src/redux",
             "@components": "./src/components",
+            "@hooks": "./src/hooks",
             "@navigation": "./src/navigation",
             "@screens": "./src/screens",
             "@src": "./src",

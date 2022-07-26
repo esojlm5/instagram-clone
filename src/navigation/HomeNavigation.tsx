@@ -1,5 +1,8 @@
+import { useState, useEffect } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
+import { useAppDispatch } from '@hooks/useRedux';
+import { userFetch } from '@redux/loginSlice';
 import { ReelsScreen, ShopScreen, SearchScreen, HomeScreen, ProfileScreen } from '../screens';
 import { Header } from '../components';
 import { HomeIcon, ReelsIcon, SearchIcon, ShopIcon } from '../icons';
@@ -7,6 +10,12 @@ import { HomeIcon, ReelsIcon, SearchIcon, ShopIcon } from '../icons';
 const Tab = createBottomTabNavigator();
 
 export const HomeTabs = () => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(userFetch({ 'email': 'jose1@gmail.com', 'password': 'jose123' }))
+  }, [])
+
   return (
     <Tab.Navigator
       initialRouteName='Home'
