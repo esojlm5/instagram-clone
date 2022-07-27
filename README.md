@@ -7,11 +7,11 @@ is a clone for instagram with firebase auth(not completed yet)
 
 This section should list any major frameworks/libraries use. Here are a few examples.
 
-* [![ReactNative]]
-* [![Redux]]
-* [![Expo]]
-* [![Firebase]]
-* [![Typescript]
+* ReactNative
+* Redux
+* Expo
+* Firebase
+* Typescript
 
 ## Getting Started
 
