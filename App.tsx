@@ -1,11 +1,10 @@
-import { useEffect } from 'react';
 import { StyleSheet } from 'react-native';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { Provider as StorePovider } from 'react-redux';
+import { Provider as StoreProvider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import { persistor, store } from '@redux/store';
@@ -20,24 +19,17 @@ declare global {
 }
 
 const Stack = createStackNavigator<RootStackParamList>();
-const Tab = createBottomTabNavigator();
 
 export default function App() {
 
   return (
-    <StorePovider store={store}>
+    <StoreProvider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <SafeAreaProvider>
           <PaperProvider>
             <NavigationContainer>
               <Stack.Navigator
                 initialRouteName='Home'
-              // screenOptions={{
-              //   tabBarStyle: {
-              //     paddingTop: 16,
-              //     paddingBottom: 10,
-              //   }
-              // }}
               >
                 <Stack.Screen
                   name="HomeTab"
@@ -49,27 +41,12 @@ export default function App() {
                 <Stack.Screen
                   name="Comment"
                   options={{ headerBackTitleVisible: false }}
-                  // options={{
-                  //   headerShown: false
-                  // }}
                   component={CommentScreen} />
               </Stack.Navigator>
             </NavigationContainer>
           </PaperProvider>
         </SafeAreaProvider>
       </PersistGate>
-    </StorePovider>
+    </StoreProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  tabContainer: {
-    paddingTop: 20
-  }
-});
