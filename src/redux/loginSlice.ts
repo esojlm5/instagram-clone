@@ -6,11 +6,6 @@ interface userLogin {
   password: string;
 }
 
-type demo = {
-  id: number,
-  nombre: string
-}
-
 // First, create the thunk
 export const userFetch = createAsyncThunk('users/fetchUser',
   // if you type your function argument here

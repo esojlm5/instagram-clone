@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { persistReducer, persistStore } from 'redux-persist';
 import logger from 'redux-logger';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import thunk, { ThunkMiddleware } from 'redux-thunk';
 import rootReducer from './rootReducer'
 
@@ -18,13 +19,14 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== 'production',
   middleware: (getDefaultMiddlewares) => {
     if (process.env.NODE_ENV !== 'production') {
-      return getDefaultMiddlewares().concat(logger);
+      return getDefaultMiddlewares({
+        serializableCheck: false
+      }).concat(logger);
     }
     else {
       return getDefaultMiddlewares()
     }
-  }
-
+  },
 })
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
